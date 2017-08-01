@@ -1,5 +1,4 @@
-
-const Koa = require('koa');
+import Koa from 'koa';
 const app = new Koa();
 const body = require('koa-body')();
 const mysql = require('mysql')
