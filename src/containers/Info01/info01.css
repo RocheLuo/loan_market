@@ -1,0 +1,35 @@
+.info01-container{
+    width:100%;
+    height:30rem;
+    padding-top: 5rem;
+}
+
+.info01-container form{
+
+    display: flex;
+    flex-direction: column;
+    height:100%;
+    justify-content: space-around;
+    box-sizing: border-box;
+    padding: 0 3rem;
+}
+.info01-container form input{
+    outline: 0;
+    background: #fff;
+    border:1px solid #dbe2e8;
+    color:#2e3d49;
+    padding:1.2rem;
+    transition:box-shadow .3s ease,border .3s ease;
+    border-radius: 4px;
+}
+.info01-container form input:focus{
+    box-shadow: 0 0.25em 0.5em 0 rgba(46,61,73,.12);
+}
+.continue-button {
+    color:#fff;
+    text-decoration: none;
+    text-align: center;
+    background-color: #02b3e4;
+    padding: 1.3rem 0;
+    border-radius: 4px;
+}

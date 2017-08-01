@@ -1,0 +1,77 @@
+.login-container{
+    width:100%;
+    height:25rem;
+    padding-top:5rem;
+    -webkit-transition: .3s ;
+    -moz-transition: .3s ;
+    -ms-transition: .3s ;
+    -o-transition: .3s ;
+    transition: .3s;
+}
+
+.login-container form{
+    display: flex;
+    flex-direction: column;
+    height:100%;
+    justify-content: space-around;
+    box-sizing: border-box;
+    padding: 0 3rem;
+}
+
+.VCode-container{
+    display: flex;
+    justify-content: space-between;
+}
+
+.VCode-container input{
+    flex: 2;
+}
+.VCode-container input:nth-of-type(1){
+    border-radius: 4px 0 0 4px !important;
+}
+.login-container form input{
+    outline: 0;
+    background: #fff;
+    border:1px solid #dbe2e8;
+    color:#2e3d49;
+    padding:1.2rem;
+    transition:box-shadow .3s ease,border .3s ease;
+    border-radius: 4px;
+}
+
+.login-container form input:focus{
+    box-shadow: 0 0.25em 0.5em 0 rgba(46,61,73,.12);
+}
+.VCode-Button {
+    background:#02b3e4;
+    border:0;
+    flex: 1;
+    border-radius: 0 4px 4px 0;
+}
+
+.VCode-Button a{
+    text-decoration: none;
+    color:#fff;
+}
+button[type="submit"]{
+    background: #02b3e4;
+    outline: 0;
+    border:1px solid #dedede;
+    border-radius: .307692308em;
+    padding:1.2rem;
+    color:#fff;
+}
+button[type="submit"] a{
+    text-decoration: none;
+    color:#fff;
+}
+.hasLogin-button{
+    background: #02b3e4;
+    outline: 0;
+    border:1px solid #dedede;
+    border-radius: .307692308em;
+    padding:1.2rem;
+    text-align: center;
+    text-decoration: none;
+    color:#fff;
+}

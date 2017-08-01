@@ -1,0 +1,115 @@
+.list-container{
+    display: flex;
+    height:18rem;
+    width:calc(100% - 2rem);
+    background-color: #fff;
+    margin:2rem auto;
+    border-radius: 1rem;
+    box-shadow: 5px 5px 25px 0 rgba(46,61,73,.2);
+    flex-direction: column;
+    position: relative;
+}
+
+.list-container::before{
+    content:"";
+    display: block;
+    position: absolute;
+    width:100%;
+    height:50%;
+    background: rgba(255,255,255,.3);
+    border-radius: 1rem 1rem 0 0 ;
+    box-shadow: 5px 5px 25px 0 rgba(46,61,73,.2);
+
+}
+.icon{
+    width:5rem;
+    height:5rem;
+    border-radius: 50%;
+    overflow: hidden;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+.icon img{
+    width:5rem;
+    height:5rem;
+}
+
+.list-container-top{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    background-color: rgb(199,52,56);
+    color:#fff;
+    border-radius: 1rem 1rem 0 0;
+    flex: 1;
+}
+
+.title-container{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+.list-container-bottom{
+    display: flex;
+    flex: 1;
+    border-radius: 0 0 1rem 1rem;
+    flex-direction: column;
+}
+
+.tag-container{
+    display: flex;
+    flex-direction: row;
+    flex: 1;
+}
+
+.tag-item-container{
+    display: flex;
+    flex-direction: row;
+    flex: 2;
+    align-items: center;
+}
+.tag-item-container div{
+    background-color:#fff;
+    color:#ffffff;
+    border-radius: 4px;
+    padding:.1rem 1rem;
+    margin-left: .6rem;
+}
+
+.tag-item-container div:nth-child(1){
+    background-color: rgb(98,49,150);
+}
+.tag-item-container div:nth-child(2){
+    background-color: rgb(5,155,77);
+}
+.tag-item-container div:nth-child(3){
+    background-color: rgb(0,124,277);
+}
+
+.tag-length{
+    color:#fff;
+    text-align: center;
+    flex: 1;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.tag-length div{
+    background-color:rgb(199,52,56);
+    padding:.1rem 1rem;
+    border-radius: 4px;
+}
+
+
+.time-container{
+    flex: 1;
+    display: flex;
+    padding-left: 2rem;
+    font-size: 1.5rem;
+    color:#333;
+}
+
