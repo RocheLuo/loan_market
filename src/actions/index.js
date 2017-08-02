@@ -1,5 +1,5 @@
 import axios from 'axios'
-
+import md5 from 'md5';
 export const SetTitle = (title) => {
     return {
         type:"SET_TITLE",
@@ -31,6 +31,20 @@ export const addInfo = (info) => {
     }
 };
 
+export const setVCode = (code) => {
+    return {
+        type:"SET_VCODE",
+        code
+    }
+}
+
+export function getVCode(phoneNumber) {
+    return dispatch => {
+        return axios.post('/api/vcode',{'phoneNumber':phoneNumber}).then(res => {
+            dispatch(setVCode(res))
+        })
+    }
+}
 
 export const sendInfo01 = (info) => {
 

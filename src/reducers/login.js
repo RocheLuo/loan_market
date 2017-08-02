@@ -1,9 +1,7 @@
 const init = {
-    login:{
         userName:null,
         phoneNumber:null,
         VCode:null
-    }
 }
 
 
@@ -13,6 +11,11 @@ export default (state = init,action = {}) => {
             return{
                 ...state,
                 login:action.login
+            }
+        case "SET_VCODE":
+            return {
+                ...state,
+                VCode:action.code
             }
         default:
             return state
