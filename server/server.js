@@ -1,4 +1,5 @@
 import Koa from 'koa';
+import {sqlConf,serverConf} from "./conf";
 const app = new Koa();
 const body = require('koa-body')();
 const mysql = require('mysql')
@@ -7,16 +8,17 @@ const serve = require('koa-static')
 const routes = require('./routes')
 
 //连接数据库
-const connection = mysql.createConnection({
-    host:'localhost',
-    user:'root',
-    database:'loan'
-});
+const connection = mysql.createConnection(sqlConf);
+
 
 connection.connect();
 
 routes(app,body,connection);
 
-app.use(serve(__dirname + '/static'))
+app.use(serve(__dirname + '/public'))
 
-console.log('run at port 4000');
+
+app.listen(serverConf.port, () => {
+    console.log('run at port',serverConf.port);
+});
+

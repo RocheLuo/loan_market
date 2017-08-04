@@ -18,6 +18,8 @@ export const setList = (list) => {
 export const getList = (type) => {
     return dispatch => {
         return axios.get("/api/list/"+type).then(res => {
+            console.log('-----------' + type)
+            console.log(res.data)
             dispatch(setList(res.data))
         })
     }

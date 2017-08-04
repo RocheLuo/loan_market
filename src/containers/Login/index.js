@@ -38,25 +38,24 @@ class Login extends Component {
         }
     }
     getVCode(e){
-
-        if(this.state.getVCode){
-            console.log('请求')
-            this.props.getVCode(this.state.phoneNumber);
-            this.setState({getVCode:false})
-            this.setState({VCodeInnerHTML:`${this.state.time}秒后重试`});
-            this.setState({VCodeStyle:{background:'#999'}})
-            let timechange = setInterval(() =>{
-                this.setState({time:this.state.time - 1})
+            if(this.state.getVCode && this.checkPhoneNumber(this.state.phoneNumber)){
+                console.log('请求');
+                this.setState({screen:''})
+                this.props.getVCode(this.state.phoneNumber);
+                this.setState({getVCode:false})
                 this.setState({VCodeInnerHTML:`${this.state.time}秒后重试`});
-                if(this.state.time <= 0){
-                    clearInterval(timechange)
-                    this.setState({VCodeInnerHTML:'获取验证'});
-                    this.setState({VCodeStyle:{background:'#02b3e4'}})
-                    this.setState({time:60})
-                    this.setState({getVCode:true})
-
-                }
-            },1000);
+                this.setState({VCodeStyle:{background:'#999'}})
+                let timechange = setInterval(() =>{
+                    this.setState({time:this.state.time - 1})
+                    this.setState({VCodeInnerHTML:`${this.state.time}秒后重试`});
+                    if(this.state.time <= 0){
+                        clearInterval(timechange)
+                        this.setState({VCodeInnerHTML:'获取验证'});
+                        this.setState({VCodeStyle:{background:'#02b3e4'}})
+                        this.setState({time:60})
+                        this.setState({getVCode:true})
+                    }
+                },1000);
         }
     }
 
@@ -85,8 +84,6 @@ class Login extends Component {
                 }
             }
         }
-
-
     }
     disLogin(e){
         e.preventDefault();

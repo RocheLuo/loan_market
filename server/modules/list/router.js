@@ -1,4 +1,4 @@
-var sql = {}
+var sql = []
 
 module.exports = function (router,body,connection){
 
@@ -7,7 +7,7 @@ module.exports = function (router,body,connection){
 
                 router.get('/api/list/:id', body, ctx => {
                     let id = ctx.params.id === 'small' ? 1 : ctx.params.id === 'middle' ? 2 : 3;
-                    setInterval(updateSql(connection,id),1000)
+                    setInterval(updateSql(connection),1000)
 
                 let Result = result.filter(function (item) {
                     return item.type === id
@@ -33,9 +33,8 @@ module.exports = function (router,body,connection){
 
                 });
 
-                console.log(Result);
-
-                ctx.body = JSON.stringify(sql) == '{}' ? Result:sql;
+                let sqlResult = sql.filter(function(item){return item.type === id})
+                ctx.body = JSON.stringify(sql) == '[]' ? Result:sqlResult;
             })
             })
         });
@@ -43,17 +42,13 @@ module.exports = function (router,body,connection){
 
 };
 
- function updateSql(connection,id){
+ function updateSql(connection){
      return function (){
          connection.query(`select * from loan_list`,function(err,result) {
              connection.query(`select * from loan_list_tags`,function(tagerr,tagResult){
 
-                 let Result = result.filter(function (item) {
-                     return item.type === id
-                 });
 
-
-                 Result.map((item,index) => {
+                 result.map((item,index) => {
                      //把数据库存的tags转换成数组
 
                      if(!Array.isArray(item.tag)){
@@ -74,7 +69,7 @@ module.exports = function (router,body,connection){
                  });
 
 
-                 sql = Result;
+                 sql = result;
 
              })
          })

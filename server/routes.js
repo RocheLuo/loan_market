@@ -9,7 +9,8 @@ module.exports = function(app,body,connection) {
     user(router,body,connection);
     info01(router,body,connection);
     vcode(router,body,connection)
+
     app.use(router.routes());
 
-    app.listen(4000);
+
 }

@@ -41,7 +41,8 @@
     display: flex;
     align-items: center;
     justify-content: space-around;
-    background-color: rgb(199,52,56);
+    /*background-color: rgb(199,52,56);*/
+    background-color: #02b3e4;
     color:#fff;
     border-radius: 1rem 1rem 0 0;
     flex: 1;
@@ -51,6 +52,7 @@
     display: flex;
     flex-direction: column;
     align-items: flex-end;
+    font-size: 1.3rem;
 }
 .list-container-bottom{
     display: flex;
@@ -108,8 +110,16 @@
 .time-container{
     flex: 1;
     display: flex;
-    padding-left: 2rem;
     font-size: 1.5rem;
     color:#333;
+    display: flex;
+    justify-content: space-between;
+    box-sizing: border-box;
+    padding:0 3rem 0 2rem;
+}
+
+.time-container a{
+    color:#2e3d49;
+    text-decoration: none;
 }
 

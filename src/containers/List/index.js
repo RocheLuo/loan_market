@@ -44,7 +44,6 @@ class List extends Component {
 
             )
         }
-        const colorSelecter = ["#02b3e4","#02b3e4","#02b3e4","#02b3e4"];
 
 
         if(this.props.list !== undefined){
@@ -52,8 +51,16 @@ class List extends Component {
                 <Header/>
                 {
                     this.props.list.map((item,index)=> {
-
-                        return <ListItem key={index} color={colorSelecter[Math.floor(Math.random()*4)]} iconurl="https://avatars0.githubusercontent.com/u/12596108?v=4&u=417be38d1269217876d37182d3f7b5d7495ee109&s=400"  title={item.name} time={item.time} money={item.money} tag={item.tag}/>
+                        console.log(item.href)
+                        return <ListItem
+                            key={index}
+                            iconurl={"../uploads/"+item.icon}
+                            title={item.name}
+                            time={item.time}
+                            money={item.money}
+                            tag={item.tag}
+                            href={item.href}
+                        />
 
                     })
                 }

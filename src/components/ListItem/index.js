@@ -3,11 +3,11 @@ import './ListItem.css'
 
 class ListItem extends Component {
     render(){
-        const {iconurl,title,time,money,tag,color} = this.props
+        const {iconurl,title,time,money,tag,color,href} = this.props
 
         const style = {
             "backgroundColor":color
-        }
+        };
         return(
             <div className="list-container">
                 <div className="list-container-top" style={style}>
@@ -27,7 +27,10 @@ class ListItem extends Component {
 
                         <div className="tag-length"><div>{tag.length}</div></div>
                     </div>
-                    <div className="time-container"><div>{time}</div></div>
+                    <div className="time-container">
+                        <div>{time}</div>
+                        <a href={href}>点击详情</a>
+                    </div>
                 </div>
 
             </div>
