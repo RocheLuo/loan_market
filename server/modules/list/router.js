@@ -2,7 +2,7 @@ var sql = []
 
 module.exports = function (router,body,connection){
 
-        connection.query(`select * from loan_list`,function(err,result) {
+        connection.query(`select * from loan_list order by queue`,function(err,result) {
             connection.query(`select * from loan_list_tags`,function(tagerr,tagResult){
 
                 router.get('/api/list/:id', body, ctx => {
@@ -44,7 +44,7 @@ module.exports = function (router,body,connection){
 
  function updateSql(connection){
      return function (){
-         connection.query(`select * from loan_list`,function(err,result) {
+         connection.query(`select * from loan_list order by queue`,function(err,result) {
              connection.query(`select * from loan_list_tags`,function(tagerr,tagResult){
 
 

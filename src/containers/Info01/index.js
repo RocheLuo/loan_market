@@ -42,7 +42,9 @@ class Info extends Component {
     }
 
     info_continue(){
-        this.props.sendcontinue(this.state);
+        if(this.state.person !== null && this.state.home_address !== null && this.state.work_address !== null){
+            this.props.sendcontinue(this.state);
+        }
     }
 
     changeFocusStyle(){
@@ -55,7 +57,6 @@ class Info extends Component {
 
 
     render(){
-        console.log(this.props.user)
         if(!sessionStorage.getItem('jwtToken')){
             return (
                 <div>
@@ -72,7 +73,11 @@ class Info extends Component {
                         <input type="text"  onFocus={this.changeFocusStyle}  onBlur={this.changeBlurStyle} onChange={this.changeMessage} name="person" placeholder="联系人"/>
                         <input type="text"  onFocus={this.changeFocusStyle}  onBlur={this.changeBlurStyle} onChange={this.changeMessage} name="home_address" placeholder="居住地址"/>
                         <input type="text"  onFocus={this.changeFocusStyle}  onBlur={this.changeBlurStyle} onChange={this.changeMessage} name="work_address" placeholder="工作单位"/>
-                        <Link to="/info"   onClick = {this.info_continue} className="continue-button">确认无误-继续</Link>
+                        {
+                            (this.state.person !== null && this.state.home_address !== null && this.state.work_address !== null)?
+                            <Link to="/info"   onClick = {this.info_continue} className="continue-button">确认无误-继续</Link> :
+                                <div  className="continue-button">确认无误-继续</div>
+                        }
                     </form>
                 </div>
             </div>

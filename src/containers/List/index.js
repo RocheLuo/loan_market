@@ -3,7 +3,7 @@ import {SetTitle,getList} from '../../actions/'
 import Header from '../../components/Header'
 import ListItem from '../../components/ListItem'
 import {connect} from 'react-redux'
-import Login from '../Login'
+import {Redirect} from 'react-router-dom'
 class List extends Component {
     constructor(props,context){
         super(props,context)
@@ -36,13 +36,8 @@ class List extends Component {
 
     render(){
         if(!sessionStorage.jwtToken){
-            this.props.setTitle("注册用户")
-            return (
-                <div>
-                    <Login/>
-                </div>
+            return <Redirect to='/login'/>
 
-            )
         }
 
 
@@ -50,8 +45,17 @@ class List extends Component {
             return(<div>
                 <Header/>
                 {
-                    this.props.list.map((item,index)=> {
-                        console.log(item.href)
+                    this.props.list.filter(item =>{
+                       return item.toggle === 1
+                    }).length === 0
+                        ?
+                        <p style={{textAlign:"center",marginTop:'1.2rem',color:"#999"}}>此分类还没有项目</p>
+                        :
+                        this.props.list.filter(item =>{
+                            return item.toggle === 1
+                        })
+                    .map((item,index)=> {
+
                         return <ListItem
                             key={index}
                             iconurl={"../uploads/"+item.icon}
@@ -60,9 +64,11 @@ class List extends Component {
                             money={item.money}
                             tag={item.tag}
                             href={item.href}
+                            id={item.id}
                         />
 
                     })
+
                 }
             </div>)
         }

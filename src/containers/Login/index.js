@@ -39,12 +39,11 @@ class Login extends Component {
     }
     getVCode(e){
             if(this.state.getVCode && this.checkPhoneNumber(this.state.phoneNumber)){
-                console.log('请求');
                 this.setState({screen:''})
                 this.props.getVCode(this.state.phoneNumber);
                 this.setState({getVCode:false})
                 this.setState({VCodeInnerHTML:`${this.state.time}秒后重试`});
-                this.setState({VCodeStyle:{background:'#999'}})
+                this.setState({VCodeStyle:{background:'#999',fontSize:'.5rem'}})
                 let timechange = setInterval(() =>{
                     this.setState({time:this.state.time - 1})
                     this.setState({VCodeInnerHTML:`${this.state.time}秒后重试`});
@@ -71,15 +70,19 @@ class Login extends Component {
                     this.setState({screen:'请填写验证码'})
                 }else{
                     this.setState({screen:''});
-                    if(
-                        this.state.VCode === this.props.VCode.data &&
-                        this.state.userName &&
-                        this.checkPhoneNumber(this.state.phoneNumber)
-                    ){
-                        this.props.sendLoginInfo(this.state)
-                        this.setState({hasLogin:true})
+                    if(this.props.VCode){
+                        if(
+                            this.state.VCode === this.props.VCode.data &&
+                            this.state.userName &&
+                            this.checkPhoneNumber(this.state.phoneNumber)
+                        ){
+                            this.props.sendLoginInfo(this.state)
+                            this.setState({hasLogin:true})
+                        }else{
+                            this.setState({screen:'验证码匹配错误'})
+                        }
                     }else{
-                        this.setState({screen:'验证码匹配错误'})
+                        this.setState({screen:'请获取验证码之后在提交'})
                     }
                 }
             }

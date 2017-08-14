@@ -10,7 +10,7 @@ class BeforeInfo extends Component {
                     <div className="hongbao">
                         <div className="topcontent">
                             <div className="avatar">
-                                <img src="https://avatars0.githubusercontent.com/u/12596108?v=4&u=417be38d1269217876d37182d3f7b5d7495ee109&s=400" alt="" width="80" height="80"/>
+                                <img src="https://gss2.bdstatic.com/9fo3dSag_xI4khGkpoWK1HF6hhy/baike/c0%3Dbaike150%2C5%2C5%2C150%2C50/sign=8b9bd5f1902bd40756cadbaf1ae0f534/4b90f603738da977bbadcdf2b751f8198718e36d.jpg" alt="" width="80" height="80"/>
                             </div>
                             <h2>美利金融</h2>
                             <div className="description">恭喜发财 大吉大利</div>

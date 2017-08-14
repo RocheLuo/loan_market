@@ -1,5 +1,4 @@
 import axios from 'axios'
-import md5 from 'md5';
 export const SetTitle = (title) => {
     return {
         type:"SET_TITLE",
@@ -18,8 +17,6 @@ export const setList = (list) => {
 export const getList = (type) => {
     return dispatch => {
         return axios.get("/api/list/"+type).then(res => {
-            console.log('-----------' + type)
-            console.log(res.data)
             dispatch(setList(res.data))
         })
     }
@@ -54,4 +51,26 @@ export const sendInfo01 = (info) => {
         return axios.post('/api/userinfo_01/',info).then()
     }
 
+}
+
+export const countInfo = (id,phoneNumber) => {
+    return dispatch => {
+        return axios.post('/api/counterInfo',[id,phoneNumber]).then()
+    }
+}
+
+export const setAdUrl = (url) => {
+    console.log('url:',url)
+    return {
+        type:'SET_AD_URL',
+        url
+    }
+}
+
+export const getAdUrl = () => {
+    return dispatch => {
+        return axios.get('/api/getAdUrl').then(res => {
+            dispatch(setAdUrl(res.data))
+        })
+    }
 }

@@ -1,6 +1,6 @@
 import React,{Component} from 'react'
 import {connect} from 'react-redux'
-import {Link,Redirect} from 'react-router-dom'
+import {Link} from 'react-router-dom'
 import {SetTitle} from '../../actions/'
 import Header from '../../components/Header'
 import './home.css'
@@ -12,9 +12,6 @@ class Home extends Component {
 
     render(){
 
-        if(!sessionStorage.jwtToken){
-           return <Redirect to='/login'/>
-        }else{
             this.props.setTitle("借贷中心")
             return(
                 <div>
@@ -33,7 +30,7 @@ class Home extends Component {
                     </div>
                 </div>
             )
-        }
+
     }
 }
 
