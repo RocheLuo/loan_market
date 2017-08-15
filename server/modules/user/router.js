@@ -1,81 +1,41 @@
 const jwt = require('jsonwebtoken')
+const pify = require('promise.ify')
+
 module.exports = function(router,body,connection){
-    router.post('/api/users',body,(ctx) => {
 
-        let hasUser = false;
-        let userToken = {};
-        let sendToken = true;
+    router.post('/api/users',body,async (ctx) => {
 
-        const selectQuery = `
-        select * from user_base_info
-         where phoneNumber = '${ctx.request.body.phoneNumber}'`;
-        const insertQuery = `
-        insert into user_base_info (userName,phoneNumber,start_time) 
-        values (
-        '${ctx.request.body.userName}'
-        ,'${ctx.request.body.phoneNumber}'
-        ,'${new Date().getFullYear()}-${new Date().getMonth()+1}-${new Date().getDate()}')`;
+            const insertAndUpdateSql = `INSERT INTO user_base_info (userName,phoneNumber) VALUES ( '${ctx.request.body.userName}' ,'${ctx.request.body.phoneNumber}') ON DUPLICATE KEY UPDATE userName='${ctx.request.body.userName}',count=count+1`;
 
-        // if(ctx.session.vcode !== )
-        connection.query(selectQuery,function(error,results){
-            console.log('check...')
-            if(error){
-                sendToken = false;
-            }
-            if(JSON.stringify(results) !== '[]'){
+            let userToken = {};
+            let sendToken = false;
 
-                console.log('update...')
-                connection.query(
-                    `update user_base_info 
-                set end_time='${new Date().getFullYear()}-${new Date().getMonth()+1}-${new Date().getDate()}'
-                ,userName='${ctx.request.body.userName}',count=count+1 where phoneNumber='${ctx.request.body.phoneNumber}'
-                `,err => {
-                        if(err){
-                            console.log(err)
-                            sendToken = false
-                        }
-                    })
-
-            }  else{
-                console.log('insert...')
-                connection.query(insertQuery,function(error,results){
-                    if(error){
-                        sendToken = false;
-                    }
-                });
-
-
-
-            }
-        });
-
-
-        if(sendToken){
             userToken = {
-                name: ctx.request.body.userName,
+                name:  ctx.request.body.userName,
                 phone: ctx.request.body.phoneNumber
             }
 
+            const results = await pify(connection.query, connection)(insertAndUpdateSql)
 
-            ctx.body = {
-                token:jwt.sign({user:userToken},'meili_loan')
+            if(results){
+                ctx.body = {
+                    token:jwt.sign({user:userToken},'meili_loan')
+                }
             }
-        }else{
-            ctx.body = {
-                token:null
-            }
-        }
+
     })
 
+    router.post('/api/counterInfo',body,async ctx => {
 
-    router.post('/api/counterInfo',body, ctx => {
         let nowDate = new Date();
+
+        //让记录到每一天
         nowDate = `${nowDate.getFullYear()}年${nowDate.getMonth() + 1}月${nowDate.getDate()}日`//${nowDate.getHours()}时${nowDate.getMinutes()}分
 
-         connection.query(`insert into loan_list_count (phoneNumber,listId,time) values ("${ctx.request.body[1]}","${ctx.request.body[0]}","${nowDate}")`,function(err,result){
-             return result
-         })
+        const insertCountSql = `insert into loan_list_count (phoneNumber,listId,time) values ("${ctx.request.body[1]}","${ctx.request.body[0]}","${nowDate}")`
+       
+        const results = await pify(connection.query, connection)(insertCountSql)
+        
+        ctx.body = results
     })
-
-
 }
