@@ -17,7 +17,7 @@ connection.connect();
 
 const CONFIG = {
     key: 'koa:sess',
-    maxAge: 86400000,
+    maxAge: 180000,
     overwrite: true,
     httpOnly: true,
     signed: true,
@@ -28,7 +28,15 @@ const CONFIG = {
 app.use(serve(__dirname + '/public'))
 app.use(session(CONFIG,app))
 
+
+// app.use(ctx => {
+
+//     ctx.session.imgvcode =  Math.floor(Math.random()*100000).toString()
+//     console.log(ctx.session.imgvcode)
+// })
+
 routes(app,body,connection);
+
 
 app.listen(serverConf.port, () => {
     console.log('run at port',serverConf.port);

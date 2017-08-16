@@ -38,7 +38,13 @@
     transition:box-shadow .3s ease,border .3s ease;
     border-radius: 4px;
 }
-
+.login-container form img{
+    width:100px;
+    height:3.7rem;
+    border:1px solid #dbe2e8;
+    border-left: 0;
+    border-radius: 0 4px 4px 0;
+}
 .login-container form input:focus{
     box-shadow: 0 0.25em 0.5em 0 rgba(46,61,73,.12);
 }

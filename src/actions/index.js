@@ -37,9 +37,9 @@ export const setVCode = (code) => {
     }
 }
 
-export function getVCode(phoneNumber) {
+export function getVCode(arg) {
     return dispatch => {
-        return axios.post('/api/vcode',{'phoneNumber':phoneNumber}).then(res => {
+        return axios.post('/api/vcode',{'phoneNumber':arg[0],'imgVCode':arg[1]}).then(res => {
             dispatch(setVCode(res))
         })
     }
